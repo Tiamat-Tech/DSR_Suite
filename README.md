@@ -55,6 +55,28 @@ Please refer to `data/README.md` for details of automated data generation pipeli
 ## Model Training
 Please refer to `model/README.md` for details of training the model with GSM. Since there are some differences between the packages of "model training" and "data generation", we recommend two different installations.
 
+## Benchmark Evaluation
+First download our constructed [DSR-Bench](https://huggingface.co/datasets/TencentARC/DSR_Suite-Data) as `benchmark.parquet`. Then modify `'PATH_TO_VIDEO_ROOT'` and `'PATH_TO_PARQUET'` in `./VLMEvalKit_mine/vlmeval/dataset/spatial_reasoning.py` to the path of directory containing videos and the path to `benchmark.parquet` respectively.
+
+Our current evaluation framework is based on [VLMEvalKit](https://github.com/open-compass/VLMEvalKit) so that you can adopt your model for evaluation according to its [Development_Guide](https://github.com/open-compass/VLMEvalKit/blob/main/docs/en/Development.md). To evaluate your adopted model or those already supported by VLMEvalKit, run the following command:
+```bash
+cd VLMEvalKit_mine
+CUDA_VISIBLE_DEVICES=0 python run.py --data Spatial-Reasoning --model YOUR_MODEL --work-dir spatial_reasoning
+```
+
+If with Qwen2.5-VL-7B-Instruct as example, it will be:
+```bash
+cd VLMEvalKit_mine
+CUDA_VISIBLE_DEVICES=0 python run.py --data Spatial-Reasoning --model Qwen2.5-VL-7B-Instruct-ForVideo --work-dir spatial_reasoning
+```
+where `--work-dir` is the directory to save the prediction results. The prediction results will be saved in `./spatial_reasoning/{YOUR_MODEL}/{YOUR_MODEL}_Spatial-Reasoning_score.xlsx`, where the column of 'score' indicates whether the model prediction is the same as the correct answer.
+
+To evaluate the model you trained before or [our trained model](https://huggingface.co/TencentARC/DSR_Suite-Model), modify the path of model's checkpoint `'PATH_TO_MODEL'` in `./VLMEvalKit_mine/vlmeval/config.py` to the evaluated one and run:
+```bash
+cd VLMEvalKit_mine
+CUDA_VISIBLE_DEVICES=0 python run.py --data Spatial-Reasoning --model Qwen2.5-VL-7B-Instruct-ForVideo-Spatial --work-dir spatial_reasoning
+```
+
 ## Citation
 If you find our work useful, please consider citing:
 
