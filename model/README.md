@@ -2,7 +2,6 @@
 1. [Installation](#installation)
 2. [Video Database Download](#video-database-download)
 3. [VLM Training](#vlm-training)
-4. [Evaluation](#evaluation)
 
 ## Installation
 Clone the repository and install the required packages.
@@ -34,12 +33,3 @@ Change `'PATH_TO_Pi3'` in `train.sh` to the checkpoint of π^3 then conduct the 
 ```bash
 sh train.sh
 ```
-## Evaluation
-First download our constructed [DSR-Bench](https://huggingface.co/datasets/TencentARC/DSR_Suite-Data) as `benchmark.parquet`. Then modify `'PATH_TO_VIDEO_ROOT'` and `'PATH_TO_PARQUET'` in `./VLMEvalKit_mine/vlmeval/dataset/spatial_reasoning.py` to the path of directory containing videos and the path to `benchmark.parquet` respectively.
-
-To evaluate the model you trained before or [our trained model](https://huggingface.co/TencentARC/DSR_Suite-Model), modify the path of model's checkpoint `'PATH_TO_MODEL'` in `./VLMEvalKit_mine/vlmeval/config.py` to the evaluated one and run:
-```bash
-cd VLMEvalKit_mine
-CUDA_VISIBLE_DEVICES=0 python run.py --data Spatial-Reasoning --model Qwen2.5-VL-7B-Instruct-ForVideo-Spatial --work-dir spatial_reasoning
-```
-where `--work-dir` is the directory to save the prediction results. The prediction results will be saved in `./spatial_reasoning/Qwen2.5-VL-7B-Instruct-ForVideo-Spatial/Qwen2.5-VL-7B-Instruct-ForVideo-Spatial_Spatial-Reasoning_score.xlsx`, where the column of 'score' indicates whether the model prediction is the same as the correct answer.
