@@ -46,7 +46,7 @@ We introduce **DSR Suite**, which consists of an automated data generation pipel
 5. [Acknowledgement](#acknowledgement)
 
 ## News
-- [x] [2025.7.10] We release [Paper](https://arxiv.org/abs/2512.20557) and this GitHub repo [DSR_Suite](https://github.com/TencentARC/DSR_Suite).
+- [x] [2025.12.25] We release [Paper](https://arxiv.org/abs/2512.20557) and this GitHub repo [DSR_Suite](https://github.com/TencentARC/DSR_Suite).
 
 
 ## Data Generation
